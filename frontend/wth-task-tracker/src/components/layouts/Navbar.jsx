@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import SideMenu from "./SideMenu";
+import logo from '../../assets/images/writetechhub-logo.png'
 
 const Navbar = ({ activeMenu }) => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
@@ -20,7 +21,8 @@ const Navbar = ({ activeMenu }) => {
         )}
       </button>
 
-      <h2 className="text-lg font-medium text-black">Task Manager</h2>
+      {/* <h2 className="text-lg font-medium text-black">Task Manager</h2> */}
+      <img src={logo} alt="WriteTech Hub" className="w-[180px]"/>
 
       {openSideMenu && (
         <div className="fixed top-[61px] -ml-4 bg-white">
