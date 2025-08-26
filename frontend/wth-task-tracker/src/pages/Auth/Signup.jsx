@@ -86,8 +86,8 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className="lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-black">Create an Account</h3>
-        <p className="text-xs text-slate-700 mt-[5px] mb-6">
+        <h3 className="text-2xl font-semibold text-black">Create an Account</h3>
+        <p className="text-[15px] text-slate-700 mt-[5px] mb-6">
           Join us today by entering your details below.
         </p>
 
@@ -134,8 +134,8 @@ const SignUp = () => {
             SIGN UP
           </button>
 
-          <p className="text-[13px] text-slate-800 mt-3">
-            Already an account?{" "}
+          <p className="text-[15px] text-slate-800 mt-3">
+            Already have an account?{" "}
             <Link className="font-medium text-primary underline" to="/login">
               Login
             </Link>
