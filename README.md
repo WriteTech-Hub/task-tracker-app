@@ -38,7 +38,7 @@ task-manager/
 
 The backend provides a REST API that handles:
 - Creating, reading, updating, and deleting tasks
-- Managing users and authentication (if enabled)
+- Managing users and authentication
 - Storing data in MongoDB
 
 ### Tech Stack
@@ -54,6 +54,7 @@ The backend provides a REST API that handles:
 The frontend is a React application created with Vite for faster builds and development. It connects to the backend API to display and manage tasks.
 
 ### Features
+- Authentication and Authorization
 - Add new tasks  
 - Edit existing tasks  
 - Mark tasks as complete or delete them  
