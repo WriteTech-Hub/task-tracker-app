@@ -40,11 +40,23 @@ const Login = () => {
 
       const { token, role } = response.data;
 
+      // if (token) {
+      //   localStorage.setItem("token", token);
+      //   updateUser(response.data)
+
+      //   //Redirect based on role
+      //   if (role === "admin") {
+      //     navigate("/admin/dashboard");
+      //   } else {
+      //     navigate("/user/dashboard");
+      //   }
+      // }
       if (token) {
         localStorage.setItem("token", token);
-        updateUser(response.data)
-
-        //Redirect based on role
+        localStorage.setItem("user", JSON.stringify(response.data)); // save full user
+      
+        updateUser(response.data);
+      
         if (role === "admin") {
           navigate("/admin/dashboard");
         } else {
