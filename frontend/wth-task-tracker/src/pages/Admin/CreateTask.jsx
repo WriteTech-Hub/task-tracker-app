@@ -70,6 +70,7 @@ const CreateTask = () => {
       });
 
       toast.success("Task Created Successfully");
+      navigate('/admin/tasks')
 
       clearData();
     } catch (error) {

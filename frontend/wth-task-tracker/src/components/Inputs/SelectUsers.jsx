@@ -70,7 +70,7 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
         title="Select Users"
       >
         <div className="space-y-4 h-[60vh] overflow-y-auto">
-            {allUsers.map((user) => (
+          {/* {allUsers.map((user) => (
             <div
               key={user._id}
               className="flex items-center gap-4 p-3 border-b border-gray-200"
@@ -94,10 +94,56 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
                 className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm outline-none"
               />
             </div>
-          ))}
+          ))} */}
+          {allUsers.map((user) => {
+            const getInitials = (name) => {
+              if (!name) return "?";
+              const parts = name.trim().split(" ");
+              if (parts.length === 1) return parts[0][0].toUpperCase();
+              // return (parts[0][0] + parts[1][0]).toUpperCase();
+              return parts[0][0].toUpperCase() + parts[parts.length - 1][0].toUpperCase();
+            };
+
+            return (
+              <div
+                key={user._id}
+                className="flex items-center gap-4 p-3 border-b border-gray-200"
+              >
+                {user.profileImageUrl ? (
+                  <img
+                    src={user.profileImageUrl}
+                    alt={user.name}
+                    className="w-10 h-10 rounded-full object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = ""; // remove broken image
+                    }}
+                  />
+                ) : (
+                  <div className="w-10 h-10 flex items-center justify-center bg-blue-500 text-white text-sm font-semibold rounded-full">
+                    {getInitials(user.name)}
+                  </div>
+                )}
+
+                <div className="flex-1">
+                  <p className="font-medium text-gray-800 dark:text-white">
+                    {user.name}
+                  </p>
+                  <p className="text-[13px] text-gray-500">{user.email}</p>
+                </div>
+
+                <input
+                  type="checkbox"
+                  checked={tempSelectedUsers.includes(user._id)}
+                  onChange={() => toggleUserSelection(user._id)}
+                  className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm outline-none"
+                />
+              </div>
+            );
+          })}
         </div>
 
-         <div className="flex justify-end gap-4 pt-4">
+        <div className="flex justify-end gap-4 pt-4">
           <button className="card-btn" onClick={() => setIsModalOpen(false)}>
             CANCEL
           </button>
