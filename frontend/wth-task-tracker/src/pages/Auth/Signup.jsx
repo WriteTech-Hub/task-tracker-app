@@ -9,7 +9,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import { UserContext } from "../../context/userContext";
 import uploadImage from "../../utils/uploadImage";
 
-const SignUp = () => {
+const Signup = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -146,4 +146,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;

@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Admin/Dashboard";
 import Login from "./pages/Auth/Login";
-import SignUp from "./pages/Auth/SignUp";
 import ManageTasks from "./pages/Admin/ManageTasks";
 import CreateTask from "./pages/Admin/CreateTask";
 import ManageUsers from "./pages/Admin/ManageUsers";
@@ -14,6 +13,7 @@ import ViewTaskDetails from "./pages/User/ViewTaskDetails";
 import PrivateRoute from "./routes/PrivateRoute";
 import UserProvider, { UserContext } from "./context/userContext";
 import { Toaster } from "react-hot-toast";
+import Signup from "./pages/Auth/Signup";
 
 const App = () => {
   return (
@@ -22,7 +22,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/signUp" element={<Signup />} />
 
             {/* Admin Routes */}
             <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
