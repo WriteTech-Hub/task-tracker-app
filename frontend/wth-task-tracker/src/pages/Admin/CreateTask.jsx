@@ -13,9 +13,12 @@ import TodoListInput from "../../components/Inputs/TodoListInput";
 import AddAttachmentsInput from "../../components/Inputs/AddAttachmentsInput";
 import DeleteAlert from "../../components/DeleteAlert";
 import Modal from "../../components/Modal";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
 
 const CreateTask = () => {
   const location = useLocation();
+  const { user } = useContext(UserContext);
   const { taskId } = location.state || {};
   const navigate = useNavigate();
 
@@ -36,6 +39,15 @@ const CreateTask = () => {
 
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
 
+  useEffect(() => {
+    if (user && user.role !== "admin") {
+      setTaskData((prev) => ({
+        ...prev,
+        assignedTo: [user._id],
+      }));
+    }
+  }, [user]);
+
   const handleValueChange = (key, value) => {
     setTaskData((prevData) => ({ ...prevData, [key]: value }));
   };
@@ -54,6 +66,33 @@ const CreateTask = () => {
   };
 
   // Create Task
+  // const createTask = async () => {
+  //   setLoading(true);
+
+  //   try {
+  //     const todolist = taskData.todoChecklist?.map((item) => ({
+  //       text: item,
+  //       completed: false,
+  //     }));
+
+  //     const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
+  //       ...taskData,
+  //       dueDate: new Date(taskData.dueDate).toISOString(),
+  //       todoChecklist: todolist,
+  //     });
+
+  //     toast.success("Task Created Successfully");
+  //     navigate("/admin/tasks");
+
+  //     clearData();
+  //   } catch (error) {
+  //     console.error("Error creating task:", error);
+  //     setLoading(false);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const createTask = async () => {
     setLoading(true);
 
@@ -63,13 +102,24 @@ const CreateTask = () => {
         completed: false,
       }));
 
-      const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
+      const payload = {
         ...taskData,
         dueDate: new Date(taskData.dueDate).toISOString(),
         todoChecklist: todolist,
-      });
+      };
+
+      // if user is not admin, force assign to themselves
+      if (user?.role !== "admin") {
+        payload.assignedTo = [user._id];
+      }
+
+      const response = await axiosInstance.post(
+        API_PATHS.TASKS.CREATE_TASK,
+        payload
+      );
 
       toast.success("Task Created Successfully");
+      navigate(user?.role === "admin" ? "/admin/tasks" : "/user/tasks");
 
       clearData();
     } catch (error) {
@@ -105,6 +155,7 @@ const CreateTask = () => {
       );
 
       toast.success("Task Updated Successfully");
+      navigate(user?.role === "admin" ? "/admin/tasks" : "/user/tasks");
     } catch (error) {
       console.error("Error creating task:", error);
       setLoading(false);
@@ -184,7 +235,7 @@ const CreateTask = () => {
 
       setOpenDeleteAlert(false);
       toast.success("Task details deleted successfully");
-      navigate('/admin/tasks')
+      navigate("/admin/tasks");
     } catch (error) {
       console.error(
         "Error deleting:",
@@ -211,10 +262,28 @@ const CreateTask = () => {
                 {taskId ? "Update Task" : "Create Task"}
               </h2>
 
-              {taskId && (
+              {/* {taskId && (
                 <button
                   className="flex items-center gap-1.5 text-[13px] font-medium text-rose-500 bg-rose-50 rounded px-2 py-1 border border-rose-100 hover:border-rose-300 cursor-pointer"
                   onClick={() => setOpenDeleteAlert(true)}
+                >
+                  <LuTrash2 className="text-base" /> Delete
+                </button>
+              )} */}
+              {taskId && (
+                <button
+                  className={`flex items-center gap-1.5 text-[13px] font-medium rounded px-2 py-1 border cursor-pointer
+      ${
+        user?.role === "admin"
+          ? "text-rose-500 bg-rose-50 border-rose-100 hover:border-rose-300"
+          : "text-gray-400 bg-gray-100 border-gray-200 cursor-not-allowed"
+      }`}
+                  onClick={() => {
+                    if (user?.role === "admin") {
+                      setOpenDeleteAlert(true);
+                    }
+                  }}
+                  disabled={user?.role !== "admin"} // disables button for non-admin
                 >
                   <LuTrash2 className="text-base" /> Delete
                 </button>
@@ -287,12 +356,29 @@ const CreateTask = () => {
                   Assign To
                 </label>
 
-                <SelectUsers
+                {/* <SelectUsers
                   selectedUsers={taskData.assignedTo}
                   setSelectedUsers={(value) => {
                     handleValueChange("assignedTo", value);
                   }}
-                />
+                /> */}
+                {user?.role === "admin" ? (
+                  // Admin can pick any user
+                  <SelectUsers
+                    selectedUsers={taskData.assignedTo}
+                    setSelectedUsers={(value) => {
+                      handleValueChange("assignedTo", value);
+                    }}
+                  />
+                ) : (
+                  // Regular user assigns task only to themselves
+                  <input
+                    type="text"
+                    value={user?.name}
+                    disabled
+                    className="form-input bg-gray-100 cursor-not-allowed"
+                  />
+                )}
               </div>
             </div>
 
@@ -349,7 +435,6 @@ const CreateTask = () => {
           onDelete={() => deleteTask()}
         />
       </Modal>
-
     </DashboardLayout>
   );
 };
