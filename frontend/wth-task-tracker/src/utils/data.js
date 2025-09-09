@@ -55,6 +55,12 @@ import {
       path: "/user/tasks",
     },
     {
+      id: "03",
+      label: "Create Task",
+      icon: LuSquarePlus,
+      path: "/user/create-task",
+    },
+    {
       id: "05",
       label: "Logout",
       icon: LuLogOut,

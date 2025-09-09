@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from "../../utils/data";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
 const SideMenu = ({ activeMenu }) => {
   const { user, clearUser } = useContext(UserContext);
-  const [sideMenuData, setSideMenuData] = useState([]);
+  // const [sideMenuData, setSideMenuData] = useState([]);
   const [imageError, setImageError] = useState(false);
 
   const navigate = useNavigate();
@@ -25,14 +25,17 @@ const SideMenu = ({ activeMenu }) => {
     navigate("/login");
   };
 
-  useEffect(() => {
-    if (user) {
-      setSideMenuData(
-        user?.role === "admin" ? SIDE_MENU_DATA : SIDE_MENU_USER_DATA
-      );
-    }
-    return () => {};
-  }, [user]);
+  const sideMenuData =
+  user?.role === "admin" ? SIDE_MENU_DATA : SIDE_MENU_USER_DATA;
+
+  // useEffect(() => {
+  //   if (user) {
+  //     setSideMenuData(
+  //       user?.role === "admin" ? SIDE_MENU_DATA : SIDE_MENU_USER_DATA
+  //     );
+  //   }
+  //   return () => {};
+  // }, [user]);
 
   // Helper to generate initials
   const getInitials = (name) => {
@@ -41,6 +44,10 @@ const SideMenu = ({ activeMenu }) => {
     if (parts.length === 1) return parts[0][0].toUpperCase();
     return parts[0][0].toUpperCase() + parts[parts.length - 1][0].toUpperCase();
   };
+
+  if (!user) {
+    return <div className="w-64 h-[calc(100vh-61px)] bg-white" />; // or a loader/skeleton
+  }
 
   return (
     <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 sticky top-[61px] z-20">

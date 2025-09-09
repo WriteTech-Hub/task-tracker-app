@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import AvatarGroup from "../../components/AvatarGroup";
 import moment from "moment";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
+import { MdOutlineEdit } from "react-icons/md";
 
 const ViewTaskDetails = () => {
   const { id } = useParams();
   const [task, setTask] = useState(null);
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const getStatusTagColor = (status) => {
     switch (status) {
@@ -41,27 +45,71 @@ const ViewTaskDetails = () => {
   };
 
   // handle todo check
+  // const updateTodoChecklist = async (index) => {
+  //   const todoChecklist = [...task?.todoChecklist];
+  //   const taskId = id;
+
+  //   if (todoChecklist && todoChecklist[index]) {
+  //     todoChecklist[index].completed = !todoChecklist[index].completed;
+
+  //     try {
+  //       const response = await axiosInstance.put(
+  //         API_PATHS.TASKS.UPDATE_TODO_CHECKLIST(taskId),
+  //         { todoChecklist }
+  //       );
+  //       if (response.status === 200) {
+  //         setTask(response.data?.task || task);
+  //       } else {
+  //         // Optionally revert the toggle if the API call fails.
+  //         todoChecklist[index].completed = !todoChecklist[index].completed;
+  //       }
+  //     } catch (error) {
+  //       todoChecklist[index].completed = !todoChecklist[index].completed;
+  //     }
+  //   }
+  // };
+
+  // Check if user can edit
+  const canEdit = () => {
+    if (!user || !task) return false;
+
+    if (user.role === "admin") return true;
+
+    // Regular user: only edit if they are assigned to this task
+    // return task.assignedTo?.some(
+    //   (assignee) => String(assignee._id) === String(user._id)
+    // );
+    return (
+      task.status !== "Completed" &&
+      task.assignedTo?.some((assignee) => String(assignee._id) === String(user._id))
+    );
+  };
+
+  const canDelete = () => {
+    if (!user || !task) return false;
+    return user.role === "admin"; // only admins can delete
+  };
+
   const updateTodoChecklist = async (index) => {
-    const todoChecklist = [...task?.todoChecklist];
-    const taskId = id;
+    const updatedChecklist = [...task.todoChecklist];
+    updatedChecklist[index].completed = !updatedChecklist[index].completed;
 
-    if (todoChecklist && todoChecklist[index]) {
-      todoChecklist[index].completed = !todoChecklist[index].completed;
+    // Optimistically update UI
+    setTask({ ...task, todoChecklist: updatedChecklist });
 
-      try {
-        const response = await axiosInstance.put(
-          API_PATHS.TASKS.UPDATE_TODO_CHECKLIST(taskId),
-          { todoChecklist }
-        );
-        if (response.status === 200) {
-          setTask(response.data?.task || task);
-        } else {
-          // Optionally revert the toggle if the API call fails.
-          todoChecklist[index].completed = !todoChecklist[index].completed;
-        }
-      } catch (error) {
-        todoChecklist[index].completed = !todoChecklist[index].completed;
+    try {
+      const response = await axiosInstance.put(
+        API_PATHS.TASKS.UPDATE_TODO_CHECKLIST(task._id),
+        { todoChecklist: updatedChecklist }
+      );
+
+      if (response.status === 200 && response.data?.task) {
+        setTask(response.data.task); // sync with backend
       }
+    } catch (error) {
+      // Revert if failed
+      updatedChecklist[index].completed = !updatedChecklist[index].completed;
+      setTask({ ...task, todoChecklist: updatedChecklist });
     }
   };
 
@@ -90,12 +138,34 @@ const ViewTaskDetails = () => {
                   {task?.title}
                 </h2>
 
-                <div
+                {/* <div
                   className={`text-[11px] md:text-[13px] font-medium ${getStatusTagColor(
                     task?.status
                   )} px-4 py-0.5 rounded `}
                 >
                   {task?.status}
+                </div> */}
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`text-[11px] md:text-[13px] font-medium ${getStatusTagColor(
+                      task?.status
+                    )} px-4 py-0.5 rounded`}
+                  >
+                    {task?.status}
+                  </div>
+
+                  {canEdit() && (
+                    <button
+                      onClick={() =>
+                        navigate("/user/create-task", {
+                          state: { taskId: task._id },
+                        })
+                      }
+                      className="text-[12px] font-medium text-blue-600 hover:underline"
+                    >
+                      <MdOutlineEdit className="text-base" /> Edit
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -123,9 +193,15 @@ const ViewTaskDetails = () => {
                   </label>
 
                   <AvatarGroup
+                    // avatars={
+                    //   task?.assignedTo?.map((item) => item?.profileImageUrl) ||
+                    //   []
+                    // }
                     avatars={
-                      task?.assignedTo?.map((item) => item?.profileImageUrl) ||
-                      []
+                      task?.assignedTo?.map((item) => ({
+                        name: item?.name,
+                        src: item?.profileImageUrl,
+                      })) || []
                     }
                     maxVisible={5}
                   />
@@ -143,6 +219,7 @@ const ViewTaskDetails = () => {
                     text={item.text}
                     isChecked={item?.completed}
                     onChange={() => updateTodoChecklist(index)}
+                    disabled={task?.status === "Completed"}
                   />
                 ))}
               </div>
@@ -185,17 +262,24 @@ const InfoBox = ({ label, value }) => {
   );
 };
 
-const TodoCheckList = ({ text, isChecked, onChange }) => {
+const TodoCheckList = ({ text, isChecked, onChange, disabled }) => {
   return (
     <div className="flex items-center gap-3 p-3">
       <input
         type="checkbox"
         checked={isChecked}
         onChange={onChange}
-        className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm outline-none cursor-pointer"
+        disabled={disabled}
+        className={`w-4 h-4 text-primary border-gray-300 rounded-sm cursor-pointer 
+          ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
       />
 
-      <p className="text-[13px] text-gray-800">{text}</p>
+      <p
+        className={`text-[13px] text-gray-800 
+          ${disabled ? "line-through text-gray-400" : ""}`}
+      >
+        {text}
+      </p>
     </div>
   );
 };

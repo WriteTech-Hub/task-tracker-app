@@ -78,14 +78,29 @@ const UserProvider = ({ children }) => {
       "Authorization"
     ] = `Bearer ${accessToken}`;
 
+    // const fetchUser = async () => {
+    //   try {
+    //     const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE);
+    //     setUser(response.data);
+    //     localStorage.setItem("user", JSON.stringify(response.data)); // keep user in sync
+    //   } catch (error) {
+    //     console.error("User not authenticated", error);
+    //     clearUser();
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
     const fetchUser = async () => {
       try {
         const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE);
         setUser(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data)); // keep user in sync
+        localStorage.setItem("user", JSON.stringify(response.data));
       } catch (error) {
-        console.error("User not authenticated", error);
-        clearUser();
+        if (error.response?.status === 401 || error.response?.status === 403) {
+          clearUser(); // only clear if truly unauthorized
+        } else {
+          console.error("Error fetching profile:", error);
+        }
       } finally {
         setLoading(false);
       }
@@ -110,8 +125,11 @@ const UserProvider = ({ children }) => {
   };
 
   return (
+    // <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>
+    //   {children}
+    // </UserContext.Provider>
     <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>
-      {children}
+      {loading ? <div>Loading...</div> : children}
     </UserContext.Provider>
   );
 };
