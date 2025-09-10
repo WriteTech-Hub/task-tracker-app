@@ -12,11 +12,34 @@ const reportRoutes = require("./routes/reportRoutes")
 const app = express();
 
 // Middleware to handle CORS
+// app.use(
+//   cors({
+//     origin: process.env.CLIENT_URL || "*",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://your-frontend.vercel.app", // replace with your actual deployed Vercel domain
+];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*",
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps, curl, etc.)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
