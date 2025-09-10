@@ -93,7 +93,7 @@ const getTaskById = async (req, res) => {
 
 // @desc    Create a new task (Admin only)
 // @route   POST /api/tasks/
-// @access  Private (Admin)
+// @access  Private (Any logged-in user)
 const createTask = async (req, res) => {
   try {
     const {
@@ -129,15 +129,58 @@ const createTask = async (req, res) => {
   }
 };
 
+
+// @access  Private
+// const updateTask = async (req, res) => {
+//   try {
+//     const task = await Task.findById(req.params.id);
+
+//     if (!task) return res.status(404).json({ message: "Task not found" });
+
+//     task.title = req.body.title || task.title;
+//     task.description = req.body.description || task.description;
+//     task.priority = req.body.priority || task.priority;
+//     task.dueDate = req.body.dueDate || task.dueDate;
+//     task.todoChecklist = req.body.todoChecklist || task.todoChecklist;
+//     task.attachments = req.body.attachments || task.attachments;
+
+//     if (req.body.assignedTo) {
+//       if (!Array.isArray(req.body.assignedTo)) {
+//         return res
+//           .status(400)
+//           .json({ message: "assignedTo must be an array of user IDs" });
+//       }
+//       task.assignedTo = req.body.assignedTo;
+//     }
+
+//     const updatedTask = await task.save();
+//     res.json({ message: "Task updated successfully", updatedTask });
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error", error: error.message });
+//   }
+// };
+
+
 // @desc    Update task details
 // @route   PUT /api/tasks/:id
-// @access  Private
+// @access  Private (Assigned user or Creator)
 const updateTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
 
     if (!task) return res.status(404).json({ message: "Task not found" });
 
+    // Permission check
+    const isAssigned = task.assignedTo.some(
+      (userId) => userId.toString() === req.user._id.toString()
+    );
+    const isCreator = task.createdBy.toString() === req.user._id.toString();
+
+    if (!isAssigned && !isCreator && req.user.role !== "admin") {
+      return res.status(403).json({ message: "Not authorized to edit this task" });
+    }
+
+    // Update fields
     task.title = req.body.title || task.title;
     task.description = req.body.description || task.description;
     task.priority = req.body.priority || task.priority;
