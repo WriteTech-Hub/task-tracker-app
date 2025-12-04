@@ -1,0 +1,116 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "steps": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 8
+    }
+  },
+  "specs": [
+    {
+      "result": "FAIL",
+      "specId": "f78cf7a3-77c7-4794-b007-1e39a955563f",
+      "tests": [
+        {
+          "result": "FAIL",
+          "testId": "1a95d971-5dad-4d52-a852-68bf179e862b",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "browser": {
+                "name": "firefox"
+              },
+              "steps": [
+                {
+                  "result": "FAIL",
+                  "resultDescription": "Couldn't open URL: An unknown server-side error occurred while processing the command. Original error: Reached error page: about:neterror?e=connectionFailure&u=http%3A//localhost%3A5173/login&c=UTF-8&d=Firefox%20can%E2%80%99t%20establish%20a%20connection%20to%20the%20server%20at%20localhost%3A5173.",
+                  "description": "Go to the login page",
+                  "goTo": {
+                    "url": "http://localhost:5173/login"
+                  },
+                  "stepId": "402f8e2a-3601-476c-991a-22d91dd7a48d"
+                },
+                {
+                  "description": "Verify the login heading is present",
+                  "find": "Welcome Back",
+                  "stepId": "77e9d92e-850f-4e26-a144-778b8ab80b39",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click on the email input field",
+                  "click": "input[placeholder='john@example.com']",
+                  "stepId": "524bd569-c7f5-46e1-958c-01dd74e94736",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Type the email into the email input field",
+                  "type": "testuser@example.com",
+                  "stepId": "15d3fcde-05c6-44ff-a01c-61c375ae1fa8",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click on the password input field",
+                  "click": "input[placeholder='Min 8 Characters']",
+                  "stepId": "3b648e30-2a6f-4fc2-bfa7-d291b058d794",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Type the password into the password input field",
+                  "type": "TestPass123",
+                  "stepId": "2b9f4eaa-a22f-4a50-9eee-9f4fd0ab8c5d",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click the login button",
+                  "click": "button[type='submit']",
+                  "stepId": "6ecf9407-7d71-494a-a238-20bc612afcfc",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Verify the dashboard greeting is visible",
+                  "find": "Good Morning!",
+                  "stepId": "42f7dd96-7925-4513-af51-cdcad7866d5e",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Take a screenshot of the dashboard",
+                  "screenshot": "dashboard.png",
+                  "stepId": "e2000c6d-4ee4-480c-8f0d-3b061757c654",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

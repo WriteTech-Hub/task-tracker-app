@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "steps": {
+      "pass": 1,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 7
+    }
+  },
+  "specs": [
+    {
+      "result": "FAIL",
+      "specId": "aa031e8e-f61e-4719-a70a-945ca07379f4",
+      "tests": [
+        {
+          "result": "FAIL",
+          "testId": "93b86585-3b83-42c8-acc1-da968a3e0c4e",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "browser": {
+                "name": "firefox"
+              },
+              "steps": [
+                {
+                  "result": "PASS",
+                  "resultDescription": "Opened URL.",
+                  "description": "Go to the login page",
+                  "goTo": {
+                    "url": "https://task-tracker-app-2mqz.vercel.app/login"
+                  },
+                  "stepId": "385351dd-c1d9-4475-99f5-937492d15d89"
+                },
+                {
+                  "outputs": {},
+                  "result": "FAIL",
+                  "resultDescription": "No elements matched selector or text.",
+                  "description": "Verify the login heading is present",
+                  "find": "Welcome Back",
+                  "stepId": "ce5d06c1-051a-4b28-aa8e-61b0bc7d62e9"
+                },
+                {
+                  "description": "Click on the email input field",
+                  "click": "input[placeholder='john@example.com']",
+                  "stepId": "d44c2892-fa15-483e-9dc1-dd6668db0792",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Type the email into the email input field",
+                  "type": "testuser@example.com",
+                  "stepId": "31f5645d-a72e-43fa-b70d-1c4ca7a62191",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click on the password input field",
+                  "click": "input[placeholder='Min 8 Characters']",
+                  "stepId": "2f5c9b37-c091-4d0c-9317-1ddb72537a26",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Type the password into the password input field",
+                  "type": "TestPass123",
+                  "stepId": "7c2ca9a1-cc99-462f-b628-7e5e794e64df",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click the login button",
+                  "click": "button[type='submit']",
+                  "stepId": "4948621a-7e81-4a44-bdd3-e2c4d5298cdc",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Verify the dashboard greeting is visible",
+                  "find": "Good Morning!",
+                  "stepId": "9dd5d892-0d1f-48c9-9cca-51bdfc6176c9",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Take a screenshot of the dashboard",
+                  "screenshot": "dashboard.png",
+                  "stepId": "eb9a49b5-e91c-4868-a554-5fa69bdcff28",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

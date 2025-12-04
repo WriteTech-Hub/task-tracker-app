@@ -1,0 +1,142 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 2
+    },
+    "steps": {
+      "pass": 1,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 4
+    }
+  },
+  "specs": [
+    {
+      "result": "FAIL",
+      "specId": "9ee5bf45-ec75-4d44-b7de-92e0b2d406c3",
+      "tests": [
+        {
+          "result": "FAIL",
+          "testId": "47042248-f195-4f09-a19e-e2311b068228",
+          "contexts": [
+            {
+              "result": {
+                "status": "SKIPPED"
+              },
+              "platform": "windows",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": []
+            },
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": [
+                {
+                  "result": "PASS",
+                  "resultDescription": "Opened URL.",
+                  "description": "Go to the login page",
+                  "goTo": {
+                    "url": "https://task-tracker-app-2mqz.vercel.app/login"
+                  },
+                  "stepId": "5a646fe8-4ed5-470b-97b9-565a29bec8ec"
+                },
+                {
+                  "outputs": {},
+                  "result": "FAIL",
+                  "resultDescription": "No elements matched selector and/or text.",
+                  "description": "Type in the email",
+                  "find": {
+                    "elementText": "Email Address",
+                    "click": true,
+                    "type": "testuser@example.com"
+                  },
+                  "stepId": "80cec58b-539d-4e49-8f02-62a64344daad"
+                },
+                {
+                  "description": "Type in the password",
+                  "find": {
+                    "elementText": "Password",
+                    "click": true,
+                    "type": "TestPass123"
+                  },
+                  "stepId": "2c5fae00-4f63-4534-b374-60e8fb622902",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click on the login button",
+                  "find": {
+                    "elementText": "LOGIN",
+                    "click": true
+                  },
+                  "stepId": "5fdf8452-64f1-43ac-afa8-1d272df7a30a",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Capture a screenshot after login attempt",
+                  "screenshot": "./output/login-success.png",
+                  "stepId": "7abb4ca4-fd19-455c-b0d2-0c8f76066cc8",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Pause to observe the result",
+                  "wait": 5000,
+                  "stepId": "a7311b28-1d30-4039-92fa-f51430b4316d",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                }
+              ]
+            },
+            {
+              "result": {
+                "status": "SKIPPED"
+              },
+              "platform": "linux",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

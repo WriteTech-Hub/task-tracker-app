@@ -1,0 +1,205 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 2
+    },
+    "steps": {
+      "pass": 4,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 1
+    }
+  },
+  "specs": [
+    {
+      "result": "FAIL",
+      "specId": "61475ecd-f3fa-449a-af41-4066ac2b1b7b",
+      "tests": [
+        {
+          "result": "FAIL",
+          "testId": "ead5c4ee-ff14-4cac-bcc0-f7b55481a093",
+          "contexts": [
+            {
+              "result": {
+                "status": "SKIPPED"
+              },
+              "platform": "windows",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": []
+            },
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": [
+                {
+                  "result": "PASS",
+                  "resultDescription": "Opened URL.",
+                  "description": "Go to the login page",
+                  "goTo": {
+                    "url": "https://task-tracker-app-2mqz.vercel.app"
+                  },
+                  "stepId": "59065119-0a93-4451-b2f6-3424f98275ac"
+                },
+                {
+                  "outputs": {
+                    "element": {
+                      "text": "Email Address",
+                      "html": "<label class=\"text-[15px] text-slate-800\">Email Address</label>",
+                      "tag": "label",
+                      "value": null,
+                      "location": {
+                        "x": 48,
+                        "y": 214
+                      },
+                      "size": {
+                        "width": 96,
+                        "height": 18
+                      },
+                      "clickable": true,
+                      "enabled": true,
+                      "selected": false,
+                      "displayed": true,
+                      "displayedInViewport": true
+                    }
+                  },
+                  "result": "PASS",
+                  "resultDescription": "Found an element matching selector. Clicked element. Typed keys.",
+                  "description": "Type in the email",
+                  "find": {
+                    "elementText": "Email Address",
+                    "click": true,
+                    "type": "testuser@example.com"
+                  },
+                  "stepId": "89831345-ceef-42ba-84d5-e5d6ea0a017e"
+                },
+                {
+                  "outputs": {
+                    "element": {
+                      "text": "Password",
+                      "html": "<label class=\"text-[15px] text-slate-800\">Password</label>",
+                      "tag": "label",
+                      "value": null,
+                      "location": {
+                        "x": 48,
+                        "y": 312
+                      },
+                      "size": {
+                        "width": 67,
+                        "height": 18
+                      },
+                      "clickable": true,
+                      "enabled": true,
+                      "selected": false,
+                      "displayed": true,
+                      "displayedInViewport": true
+                    }
+                  },
+                  "result": "PASS",
+                  "resultDescription": "Found an element matching selector. Clicked element. Typed keys.",
+                  "description": "Type in the password",
+                  "find": {
+                    "elementText": "Password",
+                    "click": true,
+                    "type": "TestPass123"
+                  },
+                  "stepId": "c025bd64-7aa4-4df5-b9c2-bfa35ae28425"
+                },
+                {
+                  "outputs": {
+                    "element": {
+                      "text": "LOGIN",
+                      "html": "<button type=\"submit\" class=\"btn-primary\">LOGIN</button>",
+                      "tag": "button",
+                      "value": "",
+                      "location": {
+                        "x": 48,
+                        "y": 412.5
+                      },
+                      "size": {
+                        "width": 384,
+                        "height": 40
+                      },
+                      "clickable": true,
+                      "enabled": true,
+                      "selected": false,
+                      "displayed": true,
+                      "displayedInViewport": true
+                    }
+                  },
+                  "result": "PASS",
+                  "resultDescription": "Found an element matching selector. Clicked element.",
+                  "description": "Click on the login button",
+                  "find": {
+                    "elementText": "LOGIN",
+                    "click": true
+                  },
+                  "stepId": "0fa5b005-963a-453d-8ec2-272412a1ab24"
+                },
+                {
+                  "outputs": {},
+                  "result": "FAIL",
+                  "resultDescription": "Saved screenshot. Screenshots are beyond maximum accepted variation: 52.75%.",
+                  "description": "Capture a screenshot after login attempt",
+                  "screenshot": "./output/login-success.png",
+                  "stepId": "85f9a18a-4781-4111-ae27-b24f0c4821a1"
+                },
+                {
+                  "description": "Pause to observe the result",
+                  "wait": 5000,
+                  "stepId": "1100e426-3f79-450f-a03f-fdc9d99dfc23",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                }
+              ]
+            },
+            {
+              "result": {
+                "status": "SKIPPED"
+              },
+              "platform": "linux",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

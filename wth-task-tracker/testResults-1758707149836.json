@@ -1,0 +1,124 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "steps": {
+      "pass": 2,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 7
+    }
+  },
+  "specs": [
+    {
+      "result": "FAIL",
+      "specId": "ead7c17d-73a2-497e-8af4-10b1ebe3b9c8",
+      "tests": [
+        {
+          "result": "FAIL",
+          "testId": "43ed2ca3-4d45-42cd-8ec7-3c761ec77925",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "browser": {
+                "name": "firefox"
+              },
+              "steps": [
+                {
+                  "result": "PASS",
+                  "resultDescription": "Opened URL.",
+                  "description": "Go to the login page",
+                  "goTo": {
+                    "url": "https://task-tracker-app-2mqz.vercel.app/login"
+                  },
+                  "stepId": "bda0ed84-9396-4ddd-9fb0-8c3eab603b33"
+                },
+                {
+                  "result": "PASS",
+                  "resultDescription": "Wait completed successfully.",
+                  "description": "Wait for the page to load",
+                  "wait": 2000,
+                  "stepId": "7619fc89-b7af-40b3-bf58-80f32beca19c"
+                },
+                {
+                  "outputs": {},
+                  "result": "FAIL",
+                  "resultDescription": "No elements matched selector or text.",
+                  "description": "Verify the login heading is present",
+                  "find": "Welcome Back",
+                  "stepId": "23125c5f-e539-467f-bc21-6a1c22fd93ed"
+                },
+                {
+                  "description": "Click on the email input field",
+                  "click": "input[placeholder='john@example.com']",
+                  "stepId": "5ec853c9-5400-48cc-9045-45cd40851599",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Type the email into the email input field",
+                  "type": "testuser@example.com",
+                  "stepId": "c3673d64-7793-4c6a-8599-c7ef9382e5f2",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click on the password input field",
+                  "click": "input[placeholder='Min 8 Characters']",
+                  "stepId": "00da6e39-56ef-4a82-853d-7b91866d21f4",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Type the password into the password input field",
+                  "type": "TestPass123",
+                  "stepId": "fcea0116-c196-40e8-af3c-59f66d220a27",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click the login button",
+                  "click": "button[type='submit']",
+                  "stepId": "8a109733-9530-42b9-861e-6325e3d01513",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Verify the dashboard greeting is visible",
+                  "find": "Good Morning!",
+                  "stepId": "1b4afb66-0db8-40cb-954f-a6b5a0fbdce3",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Take a screenshot of the dashboard",
+                  "screenshot": "dashboard.png",
+                  "stepId": "3690deda-0e9d-49b0-b0b3-4236d8070c95",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

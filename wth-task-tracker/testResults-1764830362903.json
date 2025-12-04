@@ -1,0 +1,235 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 1,
+      "fail": 0,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 1,
+      "fail": 0,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 1,
+      "fail": 0,
+      "warning": 0,
+      "skipped": 2
+    },
+    "steps": {
+      "pass": 7,
+      "fail": 0,
+      "warning": 0,
+      "skipped": 0
+    }
+  },
+  "specs": [
+    {
+      "result": "PASS",
+      "specId": "184d4948-31c1-43df-977d-066fe41efaaf",
+      "tests": [
+        {
+          "result": "PASS",
+          "testId": "5129dbdc-2547-4f5f-b8d9-0fb16d9accdf",
+          "contexts": [
+            {
+              "result": {
+                "status": "SKIPPED"
+              },
+              "platform": "windows",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": []
+            },
+            {
+              "result": "PASS",
+              "platform": "mac",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": [
+                {
+                  "result": "PASS",
+                  "resultDescription": "Opened URL.",
+                  "description": "Go to the login page",
+                  "goTo": {
+                    "url": "https://task-tracker-app-2mqz.vercel.app"
+                  },
+                  "stepId": "b210f76f-a534-4cb1-832a-473185128922"
+                },
+                {
+                  "outputs": {
+                    "element": {
+                      "text": "Welcome Back",
+                      "html": "<h3 class=\"text-2xl font-semibold text-black\">Welcome Back</h3>",
+                      "tag": "h3",
+                      "value": null,
+                      "location": {
+                        "x": 48,
+                        "y": 127
+                      },
+                      "size": {
+                        "width": 384,
+                        "height": 32
+                      },
+                      "clickable": true,
+                      "enabled": true,
+                      "selected": false,
+                      "displayed": true,
+                      "displayedInViewport": true
+                    }
+                  },
+                  "result": "PASS",
+                  "resultDescription": "Found an element matching selector.",
+                  "description": "Verify the login heading is present",
+                  "find": {
+                    "elementText": "Welcome Back"
+                  },
+                  "stepId": "23da81dc-c7e2-4d21-aea8-9fe595ce5481"
+                },
+                {
+                  "outputs": {
+                    "element": {
+                      "text": "Email Address",
+                      "html": "<label class=\"text-[15px] text-slate-800\">Email Address</label>",
+                      "tag": "label",
+                      "value": null,
+                      "location": {
+                        "x": 48,
+                        "y": 263.546875
+                      },
+                      "size": {
+                        "width": 96,
+                        "height": 18
+                      },
+                      "clickable": true,
+                      "enabled": true,
+                      "selected": false,
+                      "displayed": true,
+                      "displayedInViewport": true
+                    }
+                  },
+                  "result": "PASS",
+                  "resultDescription": "Found an element matching selector. Clicked element. Typed keys.",
+                  "description": "Type in the email",
+                  "find": {
+                    "elementText": "Email Address",
+                    "click": true,
+                    "type": "testuser@example.com"
+                  },
+                  "stepId": "8551099e-0545-4ecb-a09f-e9a165fbd375"
+                },
+                {
+                  "outputs": {
+                    "element": {
+                      "text": "Password",
+                      "html": "<label class=\"text-[15px] text-slate-800\">Password</label>",
+                      "tag": "label",
+                      "value": null,
+                      "location": {
+                        "x": 48,
+                        "y": 361.546875
+                      },
+                      "size": {
+                        "width": 67,
+                        "height": 18
+                      },
+                      "clickable": true,
+                      "enabled": true,
+                      "selected": false,
+                      "displayed": true,
+                      "displayedInViewport": true
+                    }
+                  },
+                  "result": "PASS",
+                  "resultDescription": "Found an element matching selector. Clicked element. Typed keys.",
+                  "description": "Type in the password",
+                  "find": {
+                    "elementText": "Password",
+                    "click": true,
+                    "type": "TestPass123"
+                  },
+                  "stepId": "93027563-c8bc-4170-9fcc-1667e20e9753"
+                },
+                {
+                  "outputs": {
+                    "element": {
+                      "text": "LOGIN",
+                      "html": "<button type=\"submit\" class=\"btn-primary\">LOGIN</button>",
+                      "tag": "button",
+                      "value": "",
+                      "location": {
+                        "x": 48,
+                        "y": 462.046875
+                      },
+                      "size": {
+                        "width": 384,
+                        "height": 40
+                      },
+                      "clickable": true,
+                      "enabled": true,
+                      "selected": false,
+                      "displayed": true,
+                      "displayedInViewport": true
+                    }
+                  },
+                  "result": "PASS",
+                  "resultDescription": "Found an element matching selector. Clicked element.",
+                  "description": "Click on the login button",
+                  "find": {
+                    "elementText": "LOGIN",
+                    "click": true
+                  },
+                  "stepId": "163dbd32-4b9b-4259-aee7-f3dcf9cbcbd5"
+                },
+                {
+                  "outputs": {},
+                  "result": "PASS",
+                  "resultDescription": "Saved screenshot.",
+                  "description": "Capture a screenshot after login attempt",
+                  "screenshot": "./output/login-success.png",
+                  "stepId": "5970ba21-bedf-4d78-9cb9-a27369ff3a14"
+                },
+                {
+                  "result": "PASS",
+                  "resultDescription": "Wait completed successfully.",
+                  "description": "Pause to observe the result",
+                  "wait": 5000,
+                  "stepId": "aab17fa5-2a5c-494a-8cdc-4a9675311d4e"
+                }
+              ]
+            },
+            {
+              "result": {
+                "status": "SKIPPED"
+              },
+              "platform": "linux",
+              "browser": {
+                "name": "chrome",
+                "headless": false,
+                "viewport": {
+                  "width": 1180,
+                  "height": 1480
+                }
+              },
+              "steps": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

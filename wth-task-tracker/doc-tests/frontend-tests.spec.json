@@ -1,0 +1,60 @@
+{
+    "tests": [
+      {
+        "runOn": [
+          {
+            "platforms": [
+              "windows",
+              "mac",
+              "linux"
+            ],
+            "browsers": {
+              "name": "chrome",
+              "headless": false,
+              "viewport": {
+                "width": 1180,
+                "height": 1480
+              }
+            }
+          }
+        ],
+        "steps": [
+          {
+            "description": "Go to the login page",
+            "goTo": "https://task-tracker-app-2mqz.vercel.app"
+          },
+          {
+            "description": "Type in the email",
+            "find": {
+              "elementText": "Email Address",
+              "click": true,
+              "type": "testuser@example.com"
+            }
+          },
+          {
+            "description": "Type in the password",
+            "find": {
+              "elementText": "Password",
+              "click": true,
+              "type": "TestPass123"
+            }
+          },
+          {
+            "description": "Click on the login button",
+            "find": {
+              "elementText": "LOGIN",
+              "click": true
+            }
+          },
+          {
+            "description": "Capture a screenshot after login attempt",
+            "screenshot": "./output/login-success.png"
+          },
+          {
+            "description": "Pause to observe the result",
+            "wait": 5000
+          }
+        ]
+      }
+    ]
+  }

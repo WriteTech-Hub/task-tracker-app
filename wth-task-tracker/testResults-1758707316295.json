@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "steps": {
+      "pass": 2,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 6
+    }
+  },
+  "specs": [
+    {
+      "result": "FAIL",
+      "specId": "5364899d-e3e3-4c84-8b24-a78e81c5c9ff",
+      "tests": [
+        {
+          "result": "FAIL",
+          "testId": "277dde56-7e6f-49f5-aef6-fa9c5cbb018e",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "browser": {
+                "name": "firefox"
+              },
+              "steps": [
+                {
+                  "result": "PASS",
+                  "resultDescription": "Opened URL.",
+                  "description": "Go to the login page",
+                  "goTo": {
+                    "url": "https://task-tracker-app-2mqz.vercel.app/login"
+                  },
+                  "stepId": "fd78a286-480a-4e00-80a6-d4d407fd9198"
+                },
+                {
+                  "result": "PASS",
+                  "resultDescription": "Wait completed successfully.",
+                  "description": "Wait for the page to load",
+                  "wait": 2000,
+                  "stepId": "5a2c3b03-7a97-440a-a723-7219427b7d1c"
+                },
+                {
+                  "outputs": {},
+                  "result": "FAIL",
+                  "resultDescription": "No elements matched selector or text.",
+                  "description": "Click on the email input field",
+                  "click": "input[placeholder='john@example.com']",
+                  "stepId": "0775cf55-2e86-4f55-aed3-42615660ff80"
+                },
+                {
+                  "description": "Type the email into the email input field",
+                  "type": "testuser@example.com",
+                  "stepId": "bbae95a5-3827-44d2-8f55-f3ba6823b7e8",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click on the password input field",
+                  "click": "input[placeholder='Min 8 Characters']",
+                  "stepId": "6193c351-1daa-46d1-b68e-f01bc82ab24f",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Type the password into the password input field",
+                  "type": "TestPass123",
+                  "stepId": "50f5fbc7-a7c0-47b1-bb12-d3f3448c1be0",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Click the login button",
+                  "click": "button[type='submit']",
+                  "stepId": "162b5f1d-8d47-401b-a2ad-823b2358d83c",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Verify the dashboard greeting is visible",
+                  "find": "Good Morning!",
+                  "stepId": "1c128604-f2ee-4e6e-9a31-04527bfb9b40",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                },
+                {
+                  "description": "Take a screenshot of the dashboard",
+                  "screenshot": "dashboard.png",
+                  "stepId": "68e9c0b2-9f49-4320-bb77-28eb7f561021",
+                  "result": "SKIPPED",
+                  "resultDescription": "Skipped due to previous failure in context."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
