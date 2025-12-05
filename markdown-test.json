@@ -1,0 +1,19 @@
+{
+    "baseStyleGuide": "google",
+    "rules": [
+      {
+        "name": "avoid-lorem",
+        "pattern": "lorem ipsum",
+        "message": "Avoid using placeholder text",
+        "level": "warning",
+        "suggestion": "Replace with real content"
+      },
+      {
+        "name": "passive-voice-check",
+        "pattern": "(was|were|is being|was being)",
+        "message": "Possible passive voice",
+        "level": "error",
+        "suggestion": "Rewrite in active voice"
+      }
+    ]
+  }

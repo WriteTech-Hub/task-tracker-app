@@ -1,0 +1,220 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 0,
+      "fail": 3,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 0,
+      "fail": 3,
+      "warning": 0,
+      "skipped": 0
+    },
+    "steps": {
+      "pass": 0,
+      "fail": 3,
+      "warning": 0,
+      "skipped": 0
+    }
+  },
+  "specs": [
+    {
+      "result": "FAIL",
+      "specId": "6e13345d-4826-43fa-8692-4037186ceaae",
+      "tests": [
+        {
+          "result": "FAIL",
+          "testId": "f51d9ef2-406c-43b1-8efb-4b6c43d0bcdc",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "steps": [
+                {
+                  "outputs": {
+                    "response": {
+                      "body": {
+                        "_id": "68d3c1a8e78e176189f142f8",
+                        "name": "Test User",
+                        "email": "testuser_{{randomInt:1000}}@example.com",
+                        "role": "member",
+                        "profileImageUrl": "http://example.com/image.png",
+                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjMWE4ZTc4ZTE3NjE4OWYxNDJmOCIsImlhdCI6MTc1ODcwODEzNiwiZXhwIjoxNzU5MzEyOTM2fQ.hC2rqEKdpLPW-koKwvDiMN7tS_G0JSo4nGcIp9UHpBY"
+                      },
+                      "statusCode": 201,
+                      "headers": {
+                        "x-powered-by": "Express",
+                        "vary": "Origin",
+                        "access-control-allow-credentials": "true",
+                        "content-type": "application/json; charset=utf-8",
+                        "content-length": "350",
+                        "etag": "W/\"15e-qN/jGP3E4nkQUwYgHLWcYl9AmOc\"",
+                        "date": "Wed, 24 Sep 2025 10:02:16 GMT",
+                        "connection": "keep-alive",
+                        "keep-alive": "timeout=5"
+                      }
+                    }
+                  },
+                  "result": "FAIL",
+                  "resultDescription": "Returned 201. The '_id' key didn't match the expected value. Expected: '.+'. Actual: '68d3c1a8e78e176189f142f8'.The 'token' key didn't match the expected value. Expected: '.+'. Actual: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjMWE4ZTc4ZTE3NjE4OWYxNDJmOCIsImlhdCI6MTc1ODcwODEzNiwiZXhwIjoxNzU5MzEyOTM2fQ.hC2rqEKdpLPW-koKwvDiMN7tS_G0JSo4nGcIp9UHpBY'.",
+                  "description": "POST /api/users/register with new user data",
+                  "httpRequest": {
+                    "url": "http://localhost:8000/api/auth/register",
+                    "method": "post",
+                    "request": {
+                      "headers": {
+                        "Content-Type": "application/json"
+                      },
+                      "body": {
+                        "name": "Test User",
+                        "email": "testuser_{{randomInt:1000}}@example.com",
+                        "password": "TestPass123",
+                        "profileImageUrl": "http://example.com/image.png"
+                      }
+                    },
+                    "statusCodes": [
+                      201
+                    ],
+                    "response": {
+                      "body": {
+                        "_id": ".+",
+                        "token": ".+",
+                        "role": "member"
+                      }
+                    },
+                    "path": "/Users/Jimi/Desktop/Personal/wth-task-manager/backend/doc-tests/tmp/register-response.json"
+                  },
+                  "stepId": "787f9e14-fc9e-415e-8310-8b15e6fc122c"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "result": "FAIL",
+          "testId": "879926d3-743f-4bbc-92f4-a9122596bffc",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "steps": [
+                {
+                  "outputs": {
+                    "response": {
+                      "body": {
+                        "message": "Invalid email or password"
+                      },
+                      "statusCode": 401,
+                      "headers": {
+                        "x-powered-by": "Express",
+                        "vary": "Origin",
+                        "access-control-allow-credentials": "true",
+                        "content-type": "application/json; charset=utf-8",
+                        "content-length": "39",
+                        "etag": "W/\"27-Mm37A2ls1bgL0/D8e3MSpDLbow8\"",
+                        "date": "Wed, 24 Sep 2025 10:02:17 GMT",
+                        "connection": "keep-alive",
+                        "keep-alive": "timeout=5"
+                      }
+                    }
+                  },
+                  "result": "FAIL",
+                  "resultDescription": "Returned 401. Expected one of [200]. The '_id' key didn't exist in returned JSON.The 'token' key didn't exist in returned JSON.",
+                  "description": "POST /api/users/login with valid credentials",
+                  "httpRequest": {
+                    "url": "http://localhost:8000/api/auth/login",
+                    "method": "post",
+                    "request": {
+                      "headers": {
+                        "Content-Type": "application/json"
+                      },
+                      "body": {
+                        "email": "{{fromFile:tmp/register-response.json:$.email}}",
+                        "password": "TestPass123"
+                      }
+                    },
+                    "statusCodes": [
+                      200
+                    ],
+                    "response": {
+                      "body": {
+                        "_id": ".+",
+                        "token": ".+"
+                      }
+                    },
+                    "path": "/Users/Jimi/Desktop/Personal/wth-task-manager/backend/doc-tests/tmp/login-response.json"
+                  },
+                  "stepId": "85889399-4e23-4c37-9d8e-75e00766c3e0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "result": "FAIL",
+          "testId": "d4de1c83-4bb8-487f-8c62-87174033aa52",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "steps": [
+                {
+                  "outputs": {
+                    "response": {
+                      "body": {
+                        "message": "Invalid Token",
+                        "error": "invalid token"
+                      },
+                      "statusCode": 401,
+                      "headers": {
+                        "x-powered-by": "Express",
+                        "vary": "Origin",
+                        "access-control-allow-credentials": "true",
+                        "content-type": "application/json; charset=utf-8",
+                        "content-length": "51",
+                        "etag": "W/\"33-CenMtZzj51AFlUYdqzqoTjTbGJU\"",
+                        "date": "Wed, 24 Sep 2025 10:02:17 GMT",
+                        "connection": "keep-alive",
+                        "keep-alive": "timeout=5"
+                      }
+                    }
+                  },
+                  "result": "FAIL",
+                  "resultDescription": "Returned 401. Expected one of [200]. The 'tasks' key didn't exist in returned JSON.The 'statusSummary' key didn't exist in returned JSON.",
+                  "description": "GET /api/tasks with Bearer token",
+                  "httpRequest": {
+                    "url": "http://localhost:8000/api/tasks",
+                    "method": "get",
+                    "request": {
+                      "headers": {
+                        "Authorization": "Bearer {{fromFile:tmp/login-response.json:$.token}}"
+                      }
+                    },
+                    "statusCodes": [
+                      200
+                    ],
+                    "response": {
+                      "body": {
+                        "tasks": ".*",
+                        "statusSummary": ".*"
+                      }
+                    }
+                  },
+                  "stepId": "e11279a6-c705-48a3-b583-52f30ba5e213"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

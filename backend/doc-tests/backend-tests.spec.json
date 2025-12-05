@@ -1,0 +1,82 @@
+{
+    "tests": [
+      {
+        "steps": [
+          {
+            "description": "POST /api/users/register with new user data",
+            "httpRequest": {
+              "url": "http://localhost:8000/api/auth/register",
+              "method": "post",
+              "request": {
+                "headers": { "Content-Type": "application/json" },
+                "body": {
+                  "name": "Test User",
+                  "email": "testuser_{{randomInt:1000}}@example.com",
+                  "password": "TestPass123",
+                  "profileImageUrl": "http://example.com/image.png"
+                }
+              },
+              "statusCodes": [201],
+              "response": {
+                "body": {
+                  "_id": ".+",
+                  "token": ".+",
+                  "role": "member"
+                }
+              },
+              "path": "tmp/register-response.json"
+            }
+          }
+        ]
+      },
+      {
+        "steps": [
+          {
+            "description": "POST /api/users/login with valid credentials",
+            "httpRequest": {
+              "url": "http://localhost:8000/api/auth/login",
+              "method": "post",
+              "request": {
+                "headers": { "Content-Type": "application/json" },
+                "body": {
+                  "email": "{{fromFile:tmp/register-response.json:$.email}}",
+                  "password": "TestPass123"
+                }
+              },
+              "statusCodes": [200],
+              "response": {
+                "body": {
+                  "_id": ".+",
+                  "token": ".+"
+                }
+              },
+              "path": "tmp/login-response.json"
+            }
+          }
+        ]
+      },
+      {
+        "steps": [
+          {
+            "description": "GET /api/tasks with Bearer token",
+            "httpRequest": {
+              "url": "http://localhost:8000/api/tasks",
+              "method": "get",
+              "request": {
+                "headers": {
+                  "Authorization": "Bearer {{fromFile:tmp/login-response.json:$.token}}"
+                }
+              },
+              "statusCodes": [200],
+              "response": {
+                "body": {
+                  "tasks": ".*",
+                  "statusSummary": ".*"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }

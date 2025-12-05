@@ -1,0 +1,213 @@
+{
+  "summary": {
+    "specs": {
+      "pass": 0,
+      "fail": 1,
+      "warning": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 0,
+      "fail": 3,
+      "warning": 0,
+      "skipped": 0
+    },
+    "contexts": {
+      "pass": 0,
+      "fail": 3,
+      "warning": 0,
+      "skipped": 0
+    },
+    "steps": {
+      "pass": 0,
+      "fail": 3,
+      "warning": 0,
+      "skipped": 0
+    }
+  },
+  "specs": [
+    {
+      "result": "FAIL",
+      "specId": "66e6fcf7-bff7-4fe6-b10d-14d2fab4f9e0",
+      "tests": [
+        {
+          "result": "FAIL",
+          "testId": "63d0af50-d6c0-4a7a-aa0a-ec8be26bbf37",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "steps": [
+                {
+                  "outputs": {
+                    "response": {
+                      "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot POST /api/users/register</pre>\n</body>\n</html>\n",
+                      "statusCode": 404,
+                      "headers": {
+                        "x-powered-by": "Express",
+                        "vary": "Origin",
+                        "access-control-allow-credentials": "true",
+                        "content-security-policy": "default-src 'none'",
+                        "x-content-type-options": "nosniff",
+                        "content-type": "text/html; charset=utf-8",
+                        "content-length": "158",
+                        "date": "Wed, 24 Sep 2025 10:00:20 GMT",
+                        "connection": "keep-alive",
+                        "keep-alive": "timeout=5"
+                      }
+                    }
+                  },
+                  "result": "FAIL",
+                  "resultDescription": "Returned 404. Expected one of [201]. Expected response body type didn't match actual response body type.",
+                  "description": "POST /api/users/register with new user data",
+                  "httpRequest": {
+                    "url": "http://localhost:8000/api/users/register",
+                    "method": "post",
+                    "request": {
+                      "headers": {
+                        "Content-Type": "application/json"
+                      },
+                      "body": {
+                        "name": "Test User",
+                        "email": "testuser_{{randomInt:1000}}@example.com",
+                        "password": "TestPass123",
+                        "profileImageUrl": "http://example.com/image.png"
+                      }
+                    },
+                    "statusCodes": [
+                      201
+                    ],
+                    "response": {
+                      "body": {
+                        "_id": ".+",
+                        "token": ".+",
+                        "role": "member"
+                      }
+                    },
+                    "path": "/Users/Jimi/Desktop/Personal/wth-task-manager/backend/doc-tests/tmp/register-response.json"
+                  },
+                  "stepId": "d5ad8f6b-eff6-4a73-8cf4-2952fc98e5ff"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "result": "FAIL",
+          "testId": "eb36486d-855a-4647-898f-d5b5717a5b52",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "steps": [
+                {
+                  "outputs": {
+                    "response": {
+                      "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot POST /api/users/login</pre>\n</body>\n</html>\n",
+                      "statusCode": 404,
+                      "headers": {
+                        "x-powered-by": "Express",
+                        "vary": "Origin",
+                        "access-control-allow-credentials": "true",
+                        "content-security-policy": "default-src 'none'",
+                        "x-content-type-options": "nosniff",
+                        "content-type": "text/html; charset=utf-8",
+                        "content-length": "155",
+                        "date": "Wed, 24 Sep 2025 10:00:20 GMT",
+                        "connection": "keep-alive",
+                        "keep-alive": "timeout=5"
+                      }
+                    }
+                  },
+                  "result": "FAIL",
+                  "resultDescription": "Returned 404. Expected one of [200]. Expected response body type didn't match actual response body type.",
+                  "description": "POST /api/users/login with valid credentials",
+                  "httpRequest": {
+                    "url": "http://localhost:8000/api/users/login",
+                    "method": "post",
+                    "request": {
+                      "headers": {
+                        "Content-Type": "application/json"
+                      },
+                      "body": {
+                        "email": "{{fromFile:tmp/register-response.json:$.email}}",
+                        "password": "TestPass123"
+                      }
+                    },
+                    "statusCodes": [
+                      200
+                    ],
+                    "response": {
+                      "body": {
+                        "_id": ".+",
+                        "token": ".+"
+                      }
+                    },
+                    "path": "/Users/Jimi/Desktop/Personal/wth-task-manager/backend/doc-tests/tmp/login-response.json"
+                  },
+                  "stepId": "49918257-550d-4940-9253-f1372c94e99e"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "result": "FAIL",
+          "testId": "e6e91965-dbdb-4660-8e3e-fa3bb1630b1f",
+          "contexts": [
+            {
+              "result": "FAIL",
+              "platform": "mac",
+              "steps": [
+                {
+                  "outputs": {
+                    "response": {
+                      "body": {
+                        "message": "Invalid Token",
+                        "error": "invalid token"
+                      },
+                      "statusCode": 401,
+                      "headers": {
+                        "x-powered-by": "Express",
+                        "vary": "Origin",
+                        "access-control-allow-credentials": "true",
+                        "content-type": "application/json; charset=utf-8",
+                        "content-length": "51",
+                        "etag": "W/\"33-CenMtZzj51AFlUYdqzqoTjTbGJU\"",
+                        "date": "Wed, 24 Sep 2025 10:00:20 GMT",
+                        "connection": "keep-alive",
+                        "keep-alive": "timeout=5"
+                      }
+                    }
+                  },
+                  "result": "FAIL",
+                  "resultDescription": "Returned 401. Expected one of [200]. The 'tasks' key didn't exist in returned JSON.The 'statusSummary' key didn't exist in returned JSON.",
+                  "description": "GET /api/tasks with Bearer token",
+                  "httpRequest": {
+                    "url": "http://localhost:8000/api/tasks",
+                    "method": "get",
+                    "request": {
+                      "headers": {
+                        "Authorization": "Bearer {{fromFile:tmp/login-response.json:$.token}}"
+                      }
+                    },
+                    "statusCodes": [
+                      200
+                    ],
+                    "response": {
+                      "body": {
+                        "tasks": ".*",
+                        "statusSummary": ".*"
+                      }
+                    }
+                  },
+                  "stepId": "ea324e9d-efcc-44f8-93bc-c6350bdd4007"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
